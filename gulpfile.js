@@ -19,7 +19,7 @@ gulp.task('scripts', function() {
             'src/scripts/**/*.js'
         ])
         .pipe($.concat('newtab.js'))
-        // .pipe($.uglify())
+        .pipe($.uglify())
         .pipe(gulp.dest('build'));
 });
 
