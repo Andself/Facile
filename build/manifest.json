@@ -1,0 +1,24 @@
+{
+    "name": "Facile New Tab Page",
+    "version": "0.0.1",
+    "minimum_chrome_version": "37",
+    "manifest_version": 2,
+    "description": "Chrome新标签页美化插件",
+    "icons": {
+        "128": "icon_128.png",
+        "48": "icon_48.png",
+        "16": "icon_16.png"
+    },
+    "permissions": [
+        "bookmarks",
+        "tabs",
+        "management"
+    ],
+    "chrome_url_overrides": {
+        "newtab": "newtab.html"
+    },
+    "options_page": "newtab.html#options",
+    "web_accessible_resources": [
+        "newtab.html"
+    ]
+}
