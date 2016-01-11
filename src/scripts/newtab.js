@@ -50,12 +50,11 @@ var Facile = (function(moment) {
 
         /**
          * 创建书签节点页面
-         * @param  {array} tab 包含节点书签数据的数组
+         * @param  {array} bookmarks 包含节点书签数据的数组
          */
-        var newBookmarks = function(tab, flag) {
+        var newBookmarks = function(bookmarks, flag) {
             var element = document.querySelector('[data-block="bookmarks"]');
-            var oldElement = element;
-            var bookmarks = tab;
+            var bookmarks = bookmarks;
             var html = [];
             var ul = document.createElement('ul');
             if(!flag) {
@@ -63,8 +62,8 @@ var Facile = (function(moment) {
                 var backA = document.createElement('a');
                 backA.innerHTML = '<i class="icon-back"></i>Top';
                 backA.onclick = function() {
-                    chrome.bookmarks.getTree(function(tab) {
-                        newBookmarks(tab[0].children[0].children, true);
+                    chrome.bookmarks.getTree(function(bookmarks) {
+                        newBookmarks(bookmarks[0].children[0].children, true);
                     });
                 };
                 backLi.appendChild(backA);
@@ -80,21 +79,21 @@ var Facile = (function(moment) {
                     a.innerHTML = '<i class="icon-folder"></i>' + bookmark.title;
                     (function(bookmark) {
                         a.onclick = function() {
-                            chrome.bookmarks.getSubTree(bookmark.id, function(tab) {
-                                newBookmarks(tab[0].children, false);
+                            chrome.bookmarks.getSubTree(bookmark.id, function(bookmarks) {
+                                newBookmarks(bookmarks[0].children, false);
                             });
                         };
                     })(bookmark);
                 } else {
                     a.innerHTML = '<i class="icon-bookmark"></i>' + bookmark.title;
-                    if(bookmark.index === 0) {
+                    if(bookmark.url === 'chrome://bookmarks/') {
                         a.onclick = function() {
                             chrome.tabs.create({
                                 url: 'chrome://bookmarks/'
                             });
                         };
                     } else {
-                        a.innerHTML = '<i class="icon-bookmark"></i>' + bookmark.title;
+                        a.innerHTML = '<img src="chrome://favicon/' + bookmark.url + '">' + bookmark.title;
                         a.href = bookmark.url;
                     }
                 }
@@ -104,8 +103,8 @@ var Facile = (function(moment) {
             element.innerHTML = '';
             element.appendChild(ul);
         };
-        chrome.bookmarks.getTree(function(tab) {
-            newBookmarks(tab[0].children[0].children, true);
+        chrome.bookmarks.getTree(function(bookmarks) {
+            newBookmarks(bookmarks[0].children[0].children, true);
         });
     };
 
