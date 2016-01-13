@@ -1,6 +1,6 @@
 {
     "name": "Facile New Tab Page",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "minimum_chrome_version": "37",
     "manifest_version": 2,
     "description": "Chrome新标签页美化插件",

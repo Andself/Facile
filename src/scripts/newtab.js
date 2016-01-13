@@ -115,9 +115,9 @@ var Facile = (function(moment) {
         show('time');
         clearTimer(timer);
         var newTime = function() {
-            var element = document.querySelector('[data-block="time"]');
+            var element = document.querySelector('[data-block="time"] time');
             element.innerHTML = ['<h1>','</h1>'].join(moment().format('HH:mm')) +
-                             ['<h2>','</h2>'].join(moment().format('MMM Do'));
+                                ['<h2>','</h2>'].join(moment().format('MMM Do'));
         };
         newTime();
         timer = setInterval(function() {
